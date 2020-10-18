@@ -1,3 +1,95 @@
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
 rv-playground-example {
+  width: 300px;
+  height: 200px;
+  position: relative;
+  display: inline-block;
+}
+
+.flip-card {
+  left: 0;
+  top: 0;
+  background-color: transparent;
+  width: 300px;
+  height: 200px;
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+  transition: all 0.8s;
+  position: absolute;
+}
+.flipped {
+  height: calc(80vh - 2px);
+  width: calc(80vw - 2px);
+  left: 10vw !important;
+  top: 10vh !important;
+  position: fixed;
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: all 0.8s;
+  transform-style: preserve-3d;
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.overlay {
+  z-index: 999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  backdrop-filter: blur(0px);
+  transition: all ease-in-out 0.1 s;
+}
+
+.overlay-visible {
+  backdrop-filter: blur(5px);
   display: block;
+  pointer-events: all;
+}
+
+/* Position the front and back side */
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+  border: 1px solid #f1f1f1;
+}
+
+/* Style the front side (fallback if image is missing) */
+.flip-card-front {
+  background-color: #bbb;
+  color: black;
+}
+
+.flip-card-front:hover {
+  /* offset-x | offset-y | blur-radius | spread-radius | color */
+
+  box-shadow: inset 0px 0px 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the back side */
+.flip-card-back {
+  background-color: dodgerblue;
+  color: white;
+  transform: rotateY(180deg);
 }
